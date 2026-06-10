@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="description" content="IFITT - Alien Fitness Head-to-Head Competition App" />
+    <meta property="og:title" content="IFITT - Compete Against Aliens" />
+    <meta property="og:description" content="Challenge yourself in real-time fitness competitions" />
+    <title>IFITT - Alien Fitness Battles</title>
+
+    <!-- Sentry Crash Reporting (Production Only) -->
+    <script
+      src="https://browser.sentry-cdn.com/7.100.0/bundle.min.js"
+      integrity="sha384-wdhUuAO7gSwbxVYIEkJ5ijhELnV6FgQKVzW1VKQd7sDjSL5ZCNXV+8EqV6YV8lJs"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      if (window.Sentry && import.meta.env.PROD) {
+        Sentry.init({
+          dsn: "https://YOUR_SENTRY_DSN@sentry.io/YOUR_PROJECT_ID",
+          environment: import.meta.env.MODE,
+          tracesSampleRate: 0.1,
+          beforeSend(event) {
+            // Filter out non-critical errors in production
+            if (event.level === 'warning') return null;
+            return event;
+          }
+        });
+      }
+    </script>
+
+    <!-- Google Analytics (Production Only) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      if (import.meta.env.PROD) {
+        gtag('config', 'G-XXXXXXXXXX', {
+          'allow_google_signals': false,
+          'allow_ad_personalization_signals': false
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
